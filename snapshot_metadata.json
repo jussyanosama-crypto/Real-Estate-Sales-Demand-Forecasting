@@ -1,0 +1,16 @@
+{
+  "source_url": "https://data.cityofnewyork.us/resource/w2pb-icbu.json",
+  "source_dataset": "NYC Citywide Annualized Calendar Sales Update (w2pb-icbu)",
+  "query": {
+    "$select": "date_extract_y(sale_date) as year, date_extract_m(sale_date) as month, borough, count(*) as sales_count, median(sale_price) as median_sale_price",
+    "$where": "sale_price > 0",
+    "$group": "date_extract_y(sale_date), date_extract_m(sale_date), borough",
+    "$order": "year, month, borough",
+    "$limit": 5000
+  },
+  "snapshot_created_utc": "2026-09-23T14:14:06.932685+00:00",
+  "rows": 600,
+  "period_start": "2016-01-01",
+  "period_end": "2025-12-01",
+  "note": "Aggregated from transaction-level records with sale_price > 0."
+}
